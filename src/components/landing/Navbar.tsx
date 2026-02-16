@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Train } from "lucide-react";
+import { Menu, X, TrainFrontTunnel } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
@@ -16,7 +16,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <a href="/" className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
-            <Train className="w-5 h-5 text-primary" />
+            <TrainFrontTunnel className="w-5 h-5 text-primary" />
           </div>
           <span className="text-xl font-display font-bold">
             Рейл<span className="text-primary">Стат</span>
