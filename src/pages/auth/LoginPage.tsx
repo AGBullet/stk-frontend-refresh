@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
 import logo from "@/assets/logo.png";
-import { Eye, EyeOff, Mail, Lock } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, Play } from "lucide-react";
 import { toast } from "sonner";
 
 const LoginPage = () => {
@@ -13,7 +13,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, loginDemo } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -91,6 +91,21 @@ const LoginPage = () => {
 
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Вход..." : "Войти"}
+            </Button>
+
+            <div className="relative my-2">
+              <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-border/50" /></div>
+              <div className="relative flex justify-center text-xs"><span className="bg-card px-2 text-muted-foreground">или</span></div>
+            </div>
+
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full border-primary/30 text-primary hover:bg-primary/10"
+              onClick={() => { loginDemo(); navigate("/home"); }}
+            >
+              <Play className="w-4 h-4 mr-2" />
+              Войти как демо
             </Button>
           </form>
 
