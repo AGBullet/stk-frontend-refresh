@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -9,6 +9,8 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 import homeImg from "@/assets/carousel/home.png";
 import tendersImg from "@/assets/carousel/tenders.png";
 
@@ -18,7 +20,7 @@ const slides = [
     subtitle: "Добро пожаловать в раздел поиска организаций и сертификатов!",
     description: "Найдите компании в ЖД-отрасли по ИНН, ОГРН, названию или ОКВЭД. Просмотрите основные сведения и добавляйте в избранное.",
     image: homeImg,
-    bullets: ["Поиск по ИНН, ОГРН, названию или ОКВЭД", "Подробная информация о компаниях", "Добавление в избранное", "AI-сводка с финансами и прогнозами"],
+    bullets: ["Поиск по ИНН, ОГРН, названию или ОКВЭД", "Подробная информация о компаниях", "Добавление в избранное", "AI-сводка с финансами и прогнозами", "Переключение между поиском организаций и сертификатов"],
   },
   {
     title: "AI-анализ компаний",
@@ -67,6 +69,7 @@ const slides = [
 const ScreenshotsCarousel = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const [expandedImage, setExpandedImage] = useState<string | null>(null);
 
   const onSelect = () => {
     if (!api) return;
@@ -119,12 +122,23 @@ const ScreenshotsCarousel = () => {
                     <p className="text-primary text-xs sm:text-sm font-medium mb-3 sm:mb-4">{slide.subtitle}</p>
                     
                     {slide.image ? (
-                      <img 
-                        src={slide.image} 
-                        alt={slide.title}
-                        className="w-full rounded-lg sm:rounded-xl border border-border/30 mb-3 sm:mb-4"
-                        loading="lazy"
-                      />
+                      <>
+                        <img 
+                          src={slide.image} 
+                          alt={slide.title}
+                          className="w-full rounded-lg sm:rounded-xl border border-border/30 mb-3 sm:mb-4 cursor-pointer hover:opacity-90 transition-opacity"
+                          loading="lazy"
+                          onClick={() => setExpandedImage(slide.image)}
+                        />
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="sm:hidden mb-3 w-full border-primary/30 text-primary text-xs"
+                          onClick={() => setExpandedImage(slide.image)}
+                        >
+                          Посмотреть
+                        </Button>
+                      </>
                     ) : (
                       <div className="aspect-video rounded-lg sm:rounded-xl border border-border/30 bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mb-3 sm:mb-4">
                         <p className="text-muted-foreground text-xs sm:text-sm px-4 text-center">Скриншот раздела «{slide.title}»</p>
@@ -151,7 +165,7 @@ const ScreenshotsCarousel = () => {
             <CarouselNext className="hidden sm:flex -right-14" />
           </Carousel>
 
-          {/* Mobile controls: dots + arrows */}
+          {/* Mobile controls */}
           <div className="flex items-center justify-center gap-4 mt-6 sm:hidden">
             <button 
               onClick={() => api?.scrollPrev()} 
@@ -179,6 +193,19 @@ const ScreenshotsCarousel = () => {
           </div>
         </motion.div>
       </div>
+
+      {/* Fullscreen image dialog */}
+      <Dialog open={!!expandedImage} onOpenChange={() => setExpandedImage(null)}>
+        <DialogContent className="max-w-[95vw] max-h-[95vh] p-2 bg-background/95 border-border/50">
+          {expandedImage && (
+            <img
+              src={expandedImage}
+              alt="Скриншот"
+              className="w-full h-auto rounded-lg"
+            />
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };

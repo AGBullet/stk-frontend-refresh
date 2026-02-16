@@ -11,7 +11,7 @@ const DemoSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="glass-card p-10 sm:p-16 text-center relative overflow-hidden"
+          className="glass-card p-6 sm:p-10 md:p-16 text-center relative overflow-hidden"
         >
           {/* Background glow */}
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5" />
@@ -30,7 +30,7 @@ const DemoSection = () => {
             
             <Button 
               size="lg" 
-              className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8 py-6 rounded-xl glow-green"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 text-sm sm:text-base px-6 sm:px-8 py-5 sm:py-6 rounded-xl glow-green"
               asChild
             >
               <a href="https://rail-stat.ru/demo">
