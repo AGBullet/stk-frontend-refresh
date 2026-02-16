@@ -77,12 +77,12 @@ const DemoSection = () => {
               >
                 <Button 
                   size="lg" 
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 text-sm sm:text-base px-8 sm:px-10 py-6 sm:py-7 rounded-xl glow-green text-base font-semibold"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 text-sm sm:text-base px-6 sm:px-10 py-5 sm:py-7 rounded-xl glow-green font-semibold w-full sm:w-auto max-w-xs sm:max-w-none mx-auto"
                   asChild
                 >
-                  <a href="https://rail-stat.ru/demo">
-                    Попробовать прямо сейчас
-                    <ArrowRight className="ml-2 w-5 h-5" />
+                  <a href="https://rail-stat.ru/demo" className="flex items-center justify-center gap-2">
+                    <span>Попробовать</span>
+                    <ArrowRight className="w-4 h-4 shrink-0" />
                   </a>
                 </Button>
               </motion.div>
