@@ -157,8 +157,8 @@ const ScreenshotsCarousel = () => {
               ))}
             </CarouselContent>
             
-            <CarouselPrevious className="hidden sm:flex -left-14" />
-            <CarouselNext className="hidden sm:flex -right-14" />
+            <CarouselPrevious className="-left-4 sm:-left-14 bg-card/80 border-border/50 text-foreground hover:bg-card" />
+            <CarouselNext className="-right-4 sm:-right-14 bg-card/80 border-border/50 text-foreground hover:bg-card" />
           </Carousel>
 
           {/* Mobile controls */}
