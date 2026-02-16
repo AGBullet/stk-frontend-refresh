@@ -36,10 +36,10 @@ const Navbar = () => {
 
         <div className="hidden md:flex items-center gap-3">
           <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground" asChild>
-            <a href="https://rail-stat.ru/auth/login">Войти</a>
+            <a href="/auth/login">Войти</a>
           </Button>
           <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
-            <a href="https://rail-stat.ru/auth/register">Начать</a>
+            <a href="/auth/register">Начать</a>
           </Button>
         </div>
 
@@ -61,7 +61,7 @@ const Navbar = () => {
           <a href="#how-it-works" className="text-sm text-muted-foreground hover:text-foreground py-2">Как это работает</a>
           <a href="#demo" className="text-sm text-muted-foreground hover:text-foreground py-2">Демо</a>
           <Button size="sm" className="bg-primary text-primary-foreground w-full mt-2" asChild>
-            <a href="https://rail-stat.ru/auth/login">Войти</a>
+            <a href="/auth/login">Войти</a>
           </Button>
         </motion.div>
       )}
