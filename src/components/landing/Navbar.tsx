@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, TrainFrontTunnel } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.jpg";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,9 +16,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <a href="/" className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center">
-            <TrainFrontTunnel className="w-5 h-5 text-primary" />
-          </div>
+          <img src={logo} alt="РейлСтат" className="w-9 h-9 rounded-lg object-contain" />
           <span className="text-xl font-display font-bold">
             Рейл<span className="text-primary">Стат</span>
           </span>

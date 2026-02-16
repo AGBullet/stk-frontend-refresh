@@ -1,4 +1,4 @@
-import { TrainFrontTunnel } from "lucide-react";
+import logo from "@/assets/logo.jpg";
 
 const Footer = () => {
   return (
@@ -8,7 +8,7 @@ const Footer = () => {
           {/* Левая колонка */}
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2">
-              <TrainFrontTunnel className="w-5 h-5 text-primary" />
+              <img src={logo} alt="РейлСтат" className="w-7 h-7 object-contain" />
               <span className="font-display font-semibold text-lg">
                 Рейл<span className="text-primary">Стат</span>
               </span>
