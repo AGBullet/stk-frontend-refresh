@@ -111,81 +111,80 @@ const ScreenshotsCarousel = () => {
           transition={{ duration: 0.6 }}
           className="max-w-5xl mx-auto"
         >
-          <Carousel 
-            opts={{ loop: true }} 
-            setApi={handleSetApi}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-2 sm:-ml-4">
-              {slides.map((slide, i) => (
-                <CarouselItem key={i} className="pl-2 sm:pl-4">
-                  <div className="glass-card p-4 sm:p-6 md:p-10 rounded-xl sm:rounded-2xl">
-                    <div className="flex flex-row items-center justify-between mb-2">
-                      <h3 className="text-lg sm:text-2xl font-display font-bold">{slide.title}</h3>
-                      <span className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap ml-2">{i + 1} из {slides.length}</span>
+          <div className="relative">
+            <Carousel 
+              opts={{ loop: true }} 
+              setApi={handleSetApi}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 sm:-ml-4">
+                {slides.map((slide, i) => (
+                  <CarouselItem key={i} className="pl-2 sm:pl-4">
+                    <div className="glass-card p-4 sm:p-6 md:p-10 rounded-xl sm:rounded-2xl">
+                      <div className="flex flex-row items-center justify-between mb-2">
+                        <h3 className="text-lg sm:text-2xl font-display font-bold">{slide.title}</h3>
+                        <span className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap ml-2">{i + 1} из {slides.length}</span>
+                      </div>
+                      <p className="text-primary text-xs sm:text-sm font-medium mb-3 sm:mb-4">{slide.subtitle}</p>
+                      
+                      <img 
+                        src={slide.image} 
+                        alt={slide.title}
+                        className="w-full rounded-lg sm:rounded-xl border border-border/30 mb-3 sm:mb-4 cursor-pointer hover:opacity-90 transition-opacity"
+                        loading="lazy"
+                        onClick={() => setExpandedImage(slide.image)}
+                      />
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="sm:hidden mb-3 w-full border-primary/30 text-primary text-xs"
+                        onClick={() => setExpandedImage(slide.image)}
+                      >
+                        Посмотреть
+                      </Button>
+                      
+                      <p className="text-muted-foreground text-sm mb-3 sm:mb-4">{slide.description}</p>
+                      
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2">
+                        {slide.bullets.map((bullet, j) => (
+                          <p key={j} className="text-xs sm:text-sm text-muted-foreground flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                            {bullet}
+                          </p>
+                        ))}
+                      </div>
                     </div>
-                    <p className="text-primary text-xs sm:text-sm font-medium mb-3 sm:mb-4">{slide.subtitle}</p>
-                    
-                    <img 
-                      src={slide.image} 
-                      alt={slide.title}
-                      className="w-full rounded-lg sm:rounded-xl border border-border/30 mb-3 sm:mb-4 cursor-pointer hover:opacity-90 transition-opacity"
-                      loading="lazy"
-                      onClick={() => setExpandedImage(slide.image)}
-                    />
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="sm:hidden mb-3 w-full border-primary/30 text-primary text-xs"
-                      onClick={() => setExpandedImage(slide.image)}
-                    >
-                      Посмотреть
-                    </Button>
-                    
-                    <p className="text-muted-foreground text-sm mb-3 sm:mb-4">{slide.description}</p>
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2">
-                      {slide.bullets.map((bullet, j) => (
-                        <p key={j} className="text-xs sm:text-sm text-muted-foreground flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                          {bullet}
-                        </p>
-                      ))}
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            
-            <CarouselPrevious className="-left-4 sm:-left-14 bg-card/80 border-border/50 text-foreground hover:bg-card" />
-            <CarouselNext className="-right-4 sm:-right-14 bg-card/80 border-border/50 text-foreground hover:bg-card" />
-          </Carousel>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
 
-          {/* Mobile controls */}
-          <div className="flex items-center justify-center gap-4 mt-6 sm:hidden">
-            <button 
-              onClick={() => api?.scrollPrev()} 
-              className="w-10 h-10 rounded-full border border-border/50 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+            {/* Arrow buttons overlaid on the carousel */}
+            <button
+              onClick={() => api?.scrollPrev()}
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-card/90 border border-border/50 flex items-center justify-center text-foreground hover:bg-card shadow-lg transition-colors"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
-            <div className="flex gap-1.5">
-              {slides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => api?.scrollTo(i)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    i === current ? "bg-primary w-4" : "bg-muted-foreground/30"
-                  }`}
-                />
-              ))}
-            </div>
-            <button 
-              onClick={() => api?.scrollNext()} 
-              className="w-10 h-10 rounded-full border border-border/50 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+            <button
+              onClick={() => api?.scrollNext()}
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-card/90 border border-border/50 flex items-center justify-center text-foreground hover:bg-card shadow-lg transition-colors"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
+          </div>
+
+          {/* Dot indicators */}
+          <div className="flex items-center justify-center gap-1.5 mt-6">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => api?.scrollTo(i)}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  i === current ? "bg-primary w-4" : "bg-muted-foreground/30"
+                }`}
+              />
+            ))}
           </div>
         </motion.div>
       </div>
