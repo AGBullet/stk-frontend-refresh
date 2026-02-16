@@ -57,12 +57,14 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8 py-6 rounded-xl glow-green">
-              Попробовать бесплатно
-              <ArrowRight className="ml-2 w-4 h-4" />
+            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8 py-6 rounded-xl glow-green" asChild>
+              <a href="https://rail-stat.ru/auth/register">
+                Попробовать бесплатно
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </a>
             </Button>
-            <Button size="lg" variant="outline" className="border-border/50 text-foreground hover:bg-secondary text-base px-8 py-6 rounded-xl">
-              Узнать больше
+            <Button size="lg" variant="outline" className="border-border/50 text-foreground hover:bg-secondary text-base px-8 py-6 rounded-xl" asChild>
+              <a href="#features">Узнать больше</a>
             </Button>
           </motion.div>
 

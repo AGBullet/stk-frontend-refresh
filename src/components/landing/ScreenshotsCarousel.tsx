@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Monitor } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -7,42 +6,58 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import homeImg from "@/assets/carousel/home.png";
+import tendersImg from "@/assets/carousel/tenders.png";
 
 const slides = [
   {
-    title: "Главная панель",
-    description: "Обзор ключевых показателей отрасли в реальном времени",
-    gradient: "from-primary/20 to-primary/5",
+    title: "Главная — Поиск",
+    subtitle: "Добро пожаловать в раздел поиска организаций и сертификатов!",
+    description: "Найдите компании в ЖД-отрасли по ИНН, ОГРН, названию или ОКВЭД. Просмотрите основные сведения и добавляйте в избранное.",
+    image: homeImg,
+    bullets: ["Поиск по ИНН, ОГРН, названию или ОКВЭД", "Подробная информация о компаниях", "Добавление в избранное", "AI-сводка с финансами и прогнозами"],
   },
   {
     title: "AI-анализ компаний",
-    description: "Детальный анализ финансового состояния и деловой активности",
-    gradient: "from-emerald-500/20 to-teal-500/5",
+    subtitle: "Искусственный интеллект анализирует каждую компанию",
+    description: "Финансовое состояние, деловая активность и репутация — всё в одном месте с рекомендациями.",
+    image: null,
+    bullets: ["Финансовый анализ", "Оценка репутации", "Рекомендации по взаимодействию", "Прогнозы развития"],
   },
   {
-    title: "Тендеры",
-    description: "Каталог актуальных тендеров с фильтрацией и уведомлениями",
-    gradient: "from-cyan-500/20 to-blue-500/5",
+    title: "Актуальные тендеры",
+    subtitle: "Каталог тендеров от железнодорожных компаний",
+    description: "Находите актуальные тендеры и госзаказы в железнодорожной отрасли.",
+    image: tendersImg,
+    bullets: ["Фильтрация по категориям", "Уведомления о новых тендерах", "Детали и условия", "Экспорт данных"],
   },
   {
     title: "Мониторинг изменений",
-    description: "Отслеживание изменений в компаниях и организациях",
-    gradient: "from-green-500/20 to-emerald-500/5",
+    subtitle: "Отслеживайте изменения в компаниях",
+    description: "Система автоматически отслеживает все значимые изменения.",
+    image: null,
+    bullets: ["Изменения в руководстве", "Смена юридического адреса", "Обновление уставного капитала", "История изменений"],
   },
   {
     title: "Сертификаты и Клейма",
-    description: "База данных сертификатов на железнодорожную продукцию",
-    gradient: "from-teal-500/20 to-green-500/5",
+    subtitle: "База данных сертификатов на ЖД-продукцию",
+    description: "Актуальные данные по сертификатам и клеймам организаций.",
+    image: null,
+    bullets: ["Поиск по номеру сертификата", "Проверка срока действия", "Данные по клеймам", "Экспорт в отчёт"],
   },
   {
     title: "Интеллектуальный чат",
-    description: "ИИ-ассистент для работы с данными отрасли",
-    gradient: "from-primary/20 to-emerald-500/5",
+    subtitle: "ИИ-ассистент для работы с данными",
+    description: "Общайтесь с ИИ, который знает всё о железнодорожной отрасли.",
+    image: null,
+    bullets: ["Вопросы на естественном языке", "Анализ данных по запросу", "Рекомендации", "Экспорт ответов"],
   },
   {
     title: "Юридический мониторинг",
-    description: "Информация о судебных разбирательствах компаний",
-    gradient: "from-emerald-500/20 to-primary/5",
+    subtitle: "Судебные разбирательства компаний",
+    description: "Полная информация о судебных делах каждой компании.",
+    image: null,
+    bullets: ["Активные дела", "История разбирательств", "Суммы исков", "Уведомления о новых делах"],
   },
 ];
 
@@ -70,21 +85,40 @@ const ScreenshotsCarousel = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-5xl mx-auto"
         >
           <Carousel opts={{ loop: true }} className="w-full">
             <CarouselContent>
               {slides.map((slide, i) => (
                 <CarouselItem key={i}>
-                  <div className={`glass-card p-8 sm:p-12 rounded-2xl bg-gradient-to-br ${slide.gradient}`}>
-                    <div className="aspect-video rounded-xl border border-border/30 bg-background/50 flex flex-col items-center justify-center gap-4">
-                      <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-                        <Monitor className="w-7 h-7 text-primary" />
+                  <div className="glass-card p-6 sm:p-10 rounded-2xl">
+                    <div className="flex flex-row items-center justify-between mb-2">
+                      <h3 className="text-2xl font-display font-bold">{slide.title}</h3>
+                      <span className="text-sm text-muted-foreground whitespace-nowrap">{i + 1} из {slides.length}</span>
+                    </div>
+                    <p className="text-primary text-sm font-medium mb-4">{slide.subtitle}</p>
+                    
+                    {slide.image ? (
+                      <img 
+                        src={slide.image} 
+                        alt={slide.title}
+                        className="w-full rounded-xl border border-border/30 mb-4"
+                      />
+                    ) : (
+                      <div className="aspect-video rounded-xl border border-border/30 bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mb-4">
+                        <p className="text-muted-foreground text-sm">Скриншот раздела «{slide.title}»</p>
                       </div>
-                      <h3 className="text-xl font-display font-semibold">{slide.title}</h3>
-                      <p className="text-sm text-muted-foreground max-w-md text-center px-4">
-                        {slide.description}
-                      </p>
+                    )}
+                    
+                    <p className="text-muted-foreground mb-4">{slide.description}</p>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {slide.bullets.map((bullet, j) => (
+                        <p key={j} className="text-sm text-muted-foreground flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                          {bullet}
+                        </p>
+                      ))}
                     </div>
                   </div>
                 </CarouselItem>

@@ -1,4 +1,4 @@
-import logo from "@/assets/logo.jpg";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   return (
@@ -28,18 +28,18 @@ const Footer = () => {
           {/* Компания */}
           <div className="flex flex-col gap-3">
             <h4 className="font-display font-semibold text-foreground">Компания</h4>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">О нас</a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Контакты</a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Тарифы</a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Демоверсия</a>
+            <a href="https://rail-stat.ru/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors">О нас</a>
+            <a href="mailto:contact@rail-stat.ru" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Контакты</a>
+            <a href="https://rail-stat.ru/pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Тарифы</a>
+            <a href="https://rail-stat.ru/demo" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Демоверсия</a>
           </div>
 
           {/* Политика сайта */}
           <div className="flex flex-col gap-3">
             <h4 className="font-display font-semibold text-foreground">Политика сайта</h4>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Пользовательское соглашение</a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Обработка персональных данных</a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Публичная оферта</a>
+            <a href="https://rail-stat.ru/terms" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Пользовательское соглашение</a>
+            <a href="https://rail-stat.ru/privacy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Обработка персональных данных</a>
+            <a href="https://rail-stat.ru/offer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Публичная оферта</a>
           </div>
         </div>
       </div>

@@ -24,9 +24,12 @@ const CTASection = () => {
           <Button 
             size="lg" 
             className="bg-primary text-primary-foreground hover:bg-primary/90 text-base px-10 py-6 rounded-xl glow-green"
+            asChild
           >
-            Начать работу
-            <ArrowRight className="ml-2 w-4 h-4" />
+            <a href="https://rail-stat.ru/auth/register">
+              Начать работу
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </a>
           </Button>
         </motion.div>
       </div>
