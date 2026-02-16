@@ -60,7 +60,9 @@ const Navbar = () => {
           <a href="#features" className="text-sm text-muted-foreground hover:text-foreground py-2">Возможности</a>
           <a href="#how-it-works" className="text-sm text-muted-foreground hover:text-foreground py-2">Как это работает</a>
           <a href="#demo" className="text-sm text-muted-foreground hover:text-foreground py-2">Демо</a>
-          <Button size="sm" className="bg-primary text-primary-foreground w-full mt-2">Войти</Button>
+          <Button size="sm" className="bg-primary text-primary-foreground w-full mt-2" asChild>
+            <a href="https://rail-stat.ru/auth/login">Войти</a>
+          </Button>
         </motion.div>
       )}
     </motion.nav>

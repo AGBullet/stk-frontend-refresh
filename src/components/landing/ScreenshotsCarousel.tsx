@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 import homeImg from "@/assets/carousel/home.png";
 import tendersImg from "@/assets/carousel/tenders.png";
@@ -62,20 +65,33 @@ const slides = [
 ];
 
 const ScreenshotsCarousel = () => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+
+  const onSelect = () => {
+    if (!api) return;
+    setCurrent(api.selectedScrollSnap());
+  };
+
+  const handleSetApi = (newApi: CarouselApi) => {
+    setApi(newApi);
+    newApi?.on("select", onSelect);
+  };
+
   return (
-    <section id="screenshots" className="py-24 relative">
-      <div className="container mx-auto px-6">
+    <section id="screenshots" className="py-16 sm:py-24 relative">
+      <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <span className="text-primary text-sm font-medium tracking-wider uppercase">
             Интерфейс
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold mt-3">
+          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-display font-bold mt-3">
             Как выглядит сервис
           </h2>
         </motion.div>
@@ -87,34 +103,39 @@ const ScreenshotsCarousel = () => {
           transition={{ duration: 0.6 }}
           className="max-w-5xl mx-auto"
         >
-          <Carousel opts={{ loop: true }} className="w-full">
-            <CarouselContent>
+          <Carousel 
+            opts={{ loop: true }} 
+            setApi={handleSetApi}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 sm:-ml-4">
               {slides.map((slide, i) => (
-                <CarouselItem key={i}>
-                  <div className="glass-card p-6 sm:p-10 rounded-2xl">
+                <CarouselItem key={i} className="pl-2 sm:pl-4">
+                  <div className="glass-card p-4 sm:p-6 md:p-10 rounded-xl sm:rounded-2xl">
                     <div className="flex flex-row items-center justify-between mb-2">
-                      <h3 className="text-2xl font-display font-bold">{slide.title}</h3>
-                      <span className="text-sm text-muted-foreground whitespace-nowrap">{i + 1} из {slides.length}</span>
+                      <h3 className="text-lg sm:text-2xl font-display font-bold">{slide.title}</h3>
+                      <span className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap ml-2">{i + 1} из {slides.length}</span>
                     </div>
-                    <p className="text-primary text-sm font-medium mb-4">{slide.subtitle}</p>
+                    <p className="text-primary text-xs sm:text-sm font-medium mb-3 sm:mb-4">{slide.subtitle}</p>
                     
                     {slide.image ? (
                       <img 
                         src={slide.image} 
                         alt={slide.title}
-                        className="w-full rounded-xl border border-border/30 mb-4"
+                        className="w-full rounded-lg sm:rounded-xl border border-border/30 mb-3 sm:mb-4"
+                        loading="lazy"
                       />
                     ) : (
-                      <div className="aspect-video rounded-xl border border-border/30 bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mb-4">
-                        <p className="text-muted-foreground text-sm">Скриншот раздела «{slide.title}»</p>
+                      <div className="aspect-video rounded-lg sm:rounded-xl border border-border/30 bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mb-3 sm:mb-4">
+                        <p className="text-muted-foreground text-xs sm:text-sm px-4 text-center">Скриншот раздела «{slide.title}»</p>
                       </div>
                     )}
                     
-                    <p className="text-muted-foreground mb-4">{slide.description}</p>
+                    <p className="text-muted-foreground text-sm mb-3 sm:mb-4">{slide.description}</p>
                     
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2">
                       {slide.bullets.map((bullet, j) => (
-                        <p key={j} className="text-sm text-muted-foreground flex items-center gap-2">
+                        <p key={j} className="text-xs sm:text-sm text-muted-foreground flex items-center gap-2">
                           <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
                           {bullet}
                         </p>
@@ -124,9 +145,38 @@ const ScreenshotsCarousel = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
+            
+            {/* Desktop arrows */}
             <CarouselPrevious className="hidden sm:flex -left-14" />
             <CarouselNext className="hidden sm:flex -right-14" />
           </Carousel>
+
+          {/* Mobile controls: dots + arrows */}
+          <div className="flex items-center justify-center gap-4 mt-6 sm:hidden">
+            <button 
+              onClick={() => api?.scrollPrev()} 
+              className="w-10 h-10 rounded-full border border-border/50 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <div className="flex gap-1.5">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => api?.scrollTo(i)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    i === current ? "bg-primary w-4" : "bg-muted-foreground/30"
+                  }`}
+                />
+              ))}
+            </div>
+            <button 
+              onClick={() => api?.scrollNext()} 
+              className="w-10 h-10 rounded-full border border-border/50 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
         </motion.div>
       </div>
     </section>
