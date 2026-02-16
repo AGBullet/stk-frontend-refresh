@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -13,6 +13,11 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import homeImg from "@/assets/carousel/home.png";
 import tendersImg from "@/assets/carousel/tenders.png";
+import myCertsImg from "@/assets/carousel/my-certs.png";
+import myOrgsImg from "@/assets/carousel/my-orgs.png";
+import myOrgsAddImg from "@/assets/carousel/my-orgs-add.png";
+import notificationsImg from "@/assets/carousel/notifications.png";
+import predictImg from "@/assets/carousel/predict.png";
 
 const slides = [
   {
@@ -23,11 +28,25 @@ const slides = [
     bullets: ["Поиск по ИНН, ОГРН, названию или ОКВЭД", "Подробная информация о компаниях", "Добавление в избранное", "AI-сводка с финансами и прогнозами", "Переключение между поиском организаций и сертификатов"],
   },
   {
-    title: "AI-анализ компаний",
-    subtitle: "Искусственный интеллект анализирует каждую компанию",
-    description: "Финансовое состояние, деловая активность и репутация — всё в одном месте с рекомендациями.",
-    image: null,
-    bullets: ["Финансовый анализ", "Оценка репутации", "Рекомендации по взаимодействию", "Прогнозы развития"],
+    title: "Избранные организации",
+    subtitle: "Список отслеживаемых компаний",
+    description: "Управляйте списком избранных организаций и отслеживайте изменения.",
+    image: myOrgsImg,
+    bullets: ["Список избранных компаний", "Быстрый доступ к карточке", "Удаление из избранного", "Мониторинг изменений"],
+  },
+  {
+    title: "Добавление организации",
+    subtitle: "Детальная информация о компании",
+    description: "Просмотрите полную карточку организации и добавьте в избранное.",
+    image: myOrgsAddImg,
+    bullets: ["Полная карточка компании", "Финансовые данные", "Контактная информация", "Добавление в мониторинг"],
+  },
+  {
+    title: "Избранные сертификаты",
+    subtitle: "База данных сертификатов на ЖД-продукцию",
+    description: "Актуальные данные по сертификатам и клеймам организаций.",
+    image: myCertsImg,
+    bullets: ["Поиск по номеру сертификата", "Проверка срока действия", "Данные по клеймам", "Экспорт в отчёт"],
   },
   {
     title: "Актуальные тендеры",
@@ -37,32 +56,18 @@ const slides = [
     bullets: ["Фильтрация по категориям", "Уведомления о новых тендерах", "Детали и условия", "Экспорт данных"],
   },
   {
-    title: "Мониторинг изменений",
+    title: "AI-аналитика",
+    subtitle: "Искусственный интеллект анализирует каждую компанию",
+    description: "Финансовое состояние, деловая активность и репутация — всё в одном месте с рекомендациями.",
+    image: predictImg,
+    bullets: ["Финансовый анализ", "Оценка репутации", "Рекомендации по взаимодействию", "Прогнозы развития"],
+  },
+  {
+    title: "Уведомления",
     subtitle: "Отслеживайте изменения в компаниях",
     description: "Система автоматически отслеживает все значимые изменения.",
-    image: null,
+    image: notificationsImg,
     bullets: ["Изменения в руководстве", "Смена юридического адреса", "Обновление уставного капитала", "История изменений"],
-  },
-  {
-    title: "Сертификаты и Клейма",
-    subtitle: "База данных сертификатов на ЖД-продукцию",
-    description: "Актуальные данные по сертификатам и клеймам организаций.",
-    image: null,
-    bullets: ["Поиск по номеру сертификата", "Проверка срока действия", "Данные по клеймам", "Экспорт в отчёт"],
-  },
-  {
-    title: "Интеллектуальный чат",
-    subtitle: "ИИ-ассистент для работы с данными",
-    description: "Общайтесь с ИИ, который знает всё о железнодорожной отрасли.",
-    image: null,
-    bullets: ["Вопросы на естественном языке", "Анализ данных по запросу", "Рекомендации", "Экспорт ответов"],
-  },
-  {
-    title: "Юридический мониторинг",
-    subtitle: "Судебные разбирательства компаний",
-    description: "Полная информация о судебных делах каждой компании.",
-    image: null,
-    bullets: ["Активные дела", "История разбирательств", "Суммы исков", "Уведомления о новых делах"],
   },
 ];
 
@@ -121,29 +126,21 @@ const ScreenshotsCarousel = () => {
                     </div>
                     <p className="text-primary text-xs sm:text-sm font-medium mb-3 sm:mb-4">{slide.subtitle}</p>
                     
-                    {slide.image ? (
-                      <>
-                        <img 
-                          src={slide.image} 
-                          alt={slide.title}
-                          className="w-full rounded-lg sm:rounded-xl border border-border/30 mb-3 sm:mb-4 cursor-pointer hover:opacity-90 transition-opacity"
-                          loading="lazy"
-                          onClick={() => setExpandedImage(slide.image)}
-                        />
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="sm:hidden mb-3 w-full border-primary/30 text-primary text-xs"
-                          onClick={() => setExpandedImage(slide.image)}
-                        >
-                          Посмотреть
-                        </Button>
-                      </>
-                    ) : (
-                      <div className="aspect-video rounded-lg sm:rounded-xl border border-border/30 bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mb-3 sm:mb-4">
-                        <p className="text-muted-foreground text-xs sm:text-sm px-4 text-center">Скриншот раздела «{slide.title}»</p>
-                      </div>
-                    )}
+                    <img 
+                      src={slide.image} 
+                      alt={slide.title}
+                      className="w-full rounded-lg sm:rounded-xl border border-border/30 mb-3 sm:mb-4 cursor-pointer hover:opacity-90 transition-opacity"
+                      loading="lazy"
+                      onClick={() => setExpandedImage(slide.image)}
+                    />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="sm:hidden mb-3 w-full border-primary/30 text-primary text-xs"
+                      onClick={() => setExpandedImage(slide.image)}
+                    >
+                      Посмотреть
+                    </Button>
                     
                     <p className="text-muted-foreground text-sm mb-3 sm:mb-4">{slide.description}</p>
                     
@@ -160,7 +157,6 @@ const ScreenshotsCarousel = () => {
               ))}
             </CarouselContent>
             
-            {/* Desktop arrows */}
             <CarouselPrevious className="hidden sm:flex -left-14" />
             <CarouselNext className="hidden sm:flex -right-14" />
           </Carousel>

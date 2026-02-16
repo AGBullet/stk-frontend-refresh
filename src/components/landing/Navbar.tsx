@@ -16,7 +16,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <a href="/" className="flex items-center gap-2.5">
-          <img src={logo} alt="РейлСтат" className="w-9 h-9 rounded-lg object-contain" />
+          <img src={logo} alt="РейлСтат" className="w-12 h-12 rounded-lg object-contain" />
           <span className="text-xl font-display font-bold">
             Рейл<span className="text-primary">Стат</span>
           </span>
